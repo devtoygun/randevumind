@@ -1,0 +1,19 @@
+# Node modules are generated locally per workspace.
+node_modules/
+
+# Build artifacts should never be committed.
+.next/
+dist/
+build/
+coverage/
+
+# Local environment files may contain secrets.
+.env
+.env.local
+.env.*.local
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
