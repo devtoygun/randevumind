@@ -52,7 +52,7 @@ class ProductController extends Controller
     /**
      * Yeni ürün sayfasını gösterir.
      */
-    public function new(Request $request): View
+    public function newProduct(Request $request): View
     {
         $response = $this->productCatalogService->getNewPageData();
         $this->logService->record($request, 'product.new', $this->resolveCompanyId($request), $this->resolveUserId($request));
@@ -85,7 +85,7 @@ class ProductController extends Controller
     /**
      * Yeni ürün oluşturma isteğini işler.
      */
-    public function newPost(Request $request): JsonResponse
+    public function newProductPost(Request $request): JsonResponse
     {
         $response = $this->productCatalogService->createProduct($request);
         $this->logService->record($request, 'product.new.post', $this->resolveCompanyId($request), $this->resolveUserId($request));

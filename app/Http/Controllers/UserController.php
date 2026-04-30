@@ -30,7 +30,7 @@ class UserController extends Controller
     /**
      * Yeni kullanıcı sayfasını gösterir.
      */
-    public function new(Request $request): View
+    public function newUser(Request $request): View
     {
         $response = $this->userManagementService->getNewPageData();
         $this->logService->record($request, 'user.new', $this->resolveCompanyId($request), $this->resolveUserId($request));
@@ -41,7 +41,7 @@ class UserController extends Controller
     /**
      * Yeni kullanıcı oluşturma isteğini işler.
      */
-    public function newPost(Request $request): JsonResponse
+    public function newUserPost(Request $request): JsonResponse
     {
         $response = $this->userManagementService->createUser($request);
         $this->logService->record($request, 'user.new.post', $this->resolveCompanyId($request), $this->resolveUserId($request));

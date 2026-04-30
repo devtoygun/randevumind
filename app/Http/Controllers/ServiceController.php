@@ -52,7 +52,7 @@ class ServiceController extends Controller
     /**
      * Yeni hizmet sayfasını gösterir.
      */
-    public function new(Request $request): View
+    public function newService(Request $request): View
     {
         $response = $this->serviceCatalogService->getNewPageData();
         $this->logService->record($request, 'service.new', $this->resolveCompanyId($request), $this->resolveUserId($request));
@@ -74,7 +74,7 @@ class ServiceController extends Controller
     /**
      * Yeni hizmet oluşturma isteğini işler.
      */
-    public function newPost(Request $request): JsonResponse
+    public function newServicePost(Request $request): JsonResponse
     {
         $response = $this->serviceCatalogService->createService($request);
         $this->logService->record($request, 'service.new.post', $this->resolveCompanyId($request), $this->resolveUserId($request));
