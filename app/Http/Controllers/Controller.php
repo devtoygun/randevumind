@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 abstract class Controller
 {
@@ -49,5 +50,23 @@ abstract class Controller
     protected function respondWithJson(array $response): JsonResponse
     {
         return response()->json($response);
+    }
+
+    /**
+     * Oturumdaki kullanıcı kimliğini güvenli biçimde çözümler.
+     */
+    protected function resolveUserId(Request $request): ?int
+    {
+        return $request->user()?->id;
+    }
+
+    /**
+     * İstekten firma kimliğini güvenli biçimde çözümler.
+     */
+    protected function resolveCompanyId(Request $request): ?int
+    {
+        $companyId = $request->input('company_id');
+
+        return is_numeric($companyId) ? (int) $companyId : null;
     }
 }
