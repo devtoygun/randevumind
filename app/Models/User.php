@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -55,5 +56,39 @@ class User extends Authenticatable
             'status' => 'boolean',
             'first_login' => 'boolean',
         ];
+    }
+
+    /**
+     * A user can own multiple companies.
+     */
+    public function ownedCompanies(): HasMany
+    {
+        // The companies table uses the custom "owner" foreign key.
+        return $this->hasMany(Company::class, 'owner');
+    }
+
+    /**
+     * A user can be attached to many companies through membership rows.
+     */
+    public function companyMemberships(): HasMany
+    {
+        return $this->hasMany(CompanyMember::class);
+    }
+
+    /**
+     * A user can create many appointments.
+     */
+    public function createdAppointments(): HasMany
+    {
+        // Appointment creation is tracked through the custom "created_by" column.
+        return $this->hasMany(Appointment::class, 'created_by');
+    }
+
+    /**
+     * A user can generate many log records.
+     */
+    public function logs(): HasMany
+    {
+        return $this->hasMany(Log::class);
     }
 }
