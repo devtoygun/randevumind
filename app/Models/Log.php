@@ -23,6 +23,7 @@ class Log extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'company_id',
         'user_id',
         'event',
         'url',
@@ -34,6 +35,14 @@ class Log extends Model
         'platform',
         'platform_version',
     ];
+
+    /**
+     * Each log row may belong to a company for tenant-level activity tracking.
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     /**
      * Each log row may belong to a user, but guest traffic is also possible.

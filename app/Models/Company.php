@@ -115,6 +115,14 @@ class Company extends Model
     }
 
     /**
+     * A company can own many activity log entries.
+     */
+    public function logs(): HasMany
+    {
+        return $this->hasMany(Log::class);
+    }
+
+    /**
      * A company can have many appointments.
      */
     public function appointments(): HasMany
