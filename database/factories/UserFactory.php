@@ -3,19 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
     /**
      * Define the model's default state.
      *
@@ -24,11 +17,17 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            // Keep generated fixtures aligned with the custom user profile schema.
+            'firstname' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'phone' => fake()->optional()->phoneNumber(),
+            'emailverifiedat' => now(),
+            'phoneverifiedat' => fake()->boolean(60) ? now() : null,
+            'birthday' => fake()->optional()->date(),
+            'gender' => fake()->boolean(),
+            'status' => true,
+            'first_login' => true,
         ];
     }
 
@@ -38,7 +37,8 @@ class UserFactory extends Factory
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            // This state mirrors a user who has not completed email verification yet.
+            'emailverifiedat' => null,
         ]);
     }
 }
