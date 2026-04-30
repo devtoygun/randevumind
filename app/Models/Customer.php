@@ -62,6 +62,14 @@ class Customer extends Model
     }
 
     /**
+     * A customer can buy many product rows.
+     */
+    public function customerProducts(): HasMany
+    {
+        return $this->hasMany(CustomerProduct::class);
+    }
+
+    /**
      * A customer can have many appointments.
      */
     public function appointments(): HasMany

@@ -107,10 +107,26 @@ class Company extends Model
     }
 
     /**
+     * A company can sell many customer product rows.
+     */
+    public function customerProducts(): HasMany
+    {
+        return $this->hasMany(CustomerProduct::class);
+    }
+
+    /**
      * A company can have many appointments.
      */
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * A company can issue many coupon codes.
+     */
+    public function couponCodes(): HasMany
+    {
+        return $this->hasMany(CouponCode::class);
     }
 }
