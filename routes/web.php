@@ -20,7 +20,7 @@ Route::middleware('auth')->controller(AppController::class)->group(function (): 
 });
 
 Route::middleware('guest')->controller(AuthController::class)->group(function (): void {
-    Route::get('/login', 'login')->name('auth.login');
+    Route::get('/login', 'login')->name('login');
     Route::get('/register', 'register')->name('auth.register');
     Route::get('/reset-password', 'resetPassword')->name('auth.reset-password');
 
